@@ -132,12 +132,13 @@
 
 int uv__accept4(int fd, struct sockaddr* addr, socklen_t* addrlen, int flags) {
 #if __i386__
-  unsigned long args[] = {
-    (unsigned long) fd,
-    (unsigned long) addr,
-    (unsigned long) addrlen,
-    (unsigned long) flags
-  };
+  unsigned long args[4];
+
+  args[0] = fd;
+  args[1] = (unsigned long) addr;
+  args[2] = (unsigned long) addrlen;
+  args[3] = flags;
+
   return syscall(__NR_socketcall, 18 /* SYS_ACCEPT4 */, args);
 #elif __NR_accept4
   return syscall(__NR_accept4, fd, addr, addrlen, flags);
