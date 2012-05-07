@@ -180,7 +180,6 @@ void uv_pipe_connect(uv_connect_t* req,
   int r;
 
   saved_errno = errno;
-  sockfd = -1;
   status = -1;
 
   if ((sockfd = uv__socket(AF_UNIX, SOCK_STREAM, 0)) == -1) {
